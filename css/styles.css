@@ -10061,3 +10061,25 @@ form .row:first-child .floating-label-form-group {
 .btn-social {
     margin-bottom: .5rem
 }
+
+.dosbox-container {
+    width: 640px;
+    height: 400px;
+}
+
+.dosbox-container>.dosbox-overlay {
+    background: url("/assets/img/games/Doom_\(1993\).png");
+}
+
+.dosbox-container>.dosbox-overlay>.dosbox-start {
+    border-radius: 17px 17px 17px 17px;
+    -moz-border-radius: 17px 17px 17px 17px;
+    -webkit-border-radius: 17px 17px 17px 17px;
+    border: 0px solid #000000;
+    background-color: rgba(90, 90, 90, 0.57);
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    width: 10em;
+    margin: 0 auto;
+}

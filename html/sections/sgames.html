@@ -1,31 +1,27 @@
 <script type="text/javascript" src="/js/DosBox.js"></script>
 
-<style type="text/css">
-  .dosbox-container {
-    width: 640px;
-    height: 400px;
-  }
-
-  .dosbox-container>.dosbox-overlay {
-    background: url(/assets/img/games/Doom_\(1993\).png);
-  }
-</style>
-
-<div class="text-center">
+<div class="container text-center">
   <h2 class="page-section-heading d-inline-block text-white">GAMES</h2>
-  <div id="dosbox"></div>
-  <br />
-  <button onclick="dosbox.requestFullScreen();">Make fullscreen</button>
+  <div class="divider-custom">
+    <div class="divider-custom-line"></div>
+    <div class="divider-custom-icon"><i class="fas fa-gamepad"></i></div>
+    <div class="divider-custom-line"></div>
+  </div>
+  <div class="row justify-content-center">
+    <div id="dosbox"></div>
+    <br />
+  </div>
+  <button class="btn btn-secondary" onclick="dosbox.requestFullScreen();">Fullscreen</button>
 </div>
 
 <script type="text/javascript">
   var dosbox = new Dosbox({
     id: "dosbox",
     onload: function (dosbox) {
+      dosbox.start = $('<div class="dosbox-start">Click to start');
       dosbox.run('/assets/doom-box.zip', './DOOM.BAT');
     },
     onrun: function (dosbox, app) {
-      console.log("Run '" + app + "'");
       $('a#dosbox_fullscreen').show();
     }
   });
