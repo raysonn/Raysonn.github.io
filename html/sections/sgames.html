@@ -1,0 +1,32 @@
+<script type="text/javascript" src="/js/DosBox.js"></script>
+
+<style type="text/css">
+  .dosbox-container {
+    width: 640px;
+    height: 400px;
+  }
+
+  .dosbox-container>.dosbox-overlay {
+    background: url(/assets/img/games/Doom_\(1993\).png);
+  }
+</style>
+
+<div class="text-center">
+  <h2 class="page-section-heading d-inline-block text-white">GAMES</h2>
+  <div id="dosbox"></div>
+  <br />
+  <button onclick="dosbox.requestFullScreen();">Make fullscreen</button>
+</div>
+
+<script type="text/javascript">
+  var dosbox = new Dosbox({
+    id: "dosbox",
+    onload: function (dosbox) {
+      dosbox.run('/assets/doom-box.zip', './DOOM.BAT');
+    },
+    onrun: function (dosbox, app) {
+      console.log("Run '" + app + "'");
+      $('a#dosbox_fullscreen').show();
+    }
+  });
+</script>
