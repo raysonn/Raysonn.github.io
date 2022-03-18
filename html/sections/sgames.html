@@ -1,7 +1,7 @@
 <script type="text/javascript" src="/js/DosBox.js"></script>
 
 <div class="container text-center">
-  <h2 class="page-section-heading d-inline-block text-white">GAMES</h2>
+  <h2 class="page-section-heading d-inline-block text-white" title="Doom em js incoporado a pagina para descontrair" >GAMES </h2>
   <div class="divider-custom">
     <div class="divider-custom-line"></div>
     <div class="divider-custom-icon"><i class="fas fa-gamepad"></i></div>
@@ -11,14 +11,18 @@
     <div id="dosbox"></div>
     <br />
   </div>
-  <button class="btn btn-secondary" onclick="dosbox.requestFullScreen();">Fullscreen</button>
+  <div class="divider-custom">
+    <div class="divider-custom-line"></div>
+    <div class="divider-custom-icon"><i class="fas fa-gamepad"></i></div>
+    <div class="divider-custom-line"></div>
+  </div>
+  <button class="btn btn-secondary" title="Espere o jogo Iniciar" onclick="dosbox.requestFullScreen();">Fullscreen</button>
 </div>
 
 <script type="text/javascript">
   var dosbox = new Dosbox({
     id: "dosbox",
     onload: function (dosbox) {
-      dosbox.start = $('<div class="dosbox-start">Click to start');
       dosbox.run('/assets/doom-box.zip', './DOOM.BAT');
     },
     onrun: function (dosbox, app) {

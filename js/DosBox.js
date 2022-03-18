@@ -356,7 +356,7 @@
       this.overlay = $('<div class="dosbox-overlay"></div>');
       this.loaderMessage = $('<div class="dosbox-loader-message"></div>');
       this.loader = $('<div class="dosbox-loader"></div>').append($('<div class="st-loader"></div>').append($('<span class="equal"></span>'))).append(this.loaderMessage);
-      this.start = $('<div class="dosbox-start">Click to Start</div>');
+      this.start = $('<div class="dosbox-start text-white">Click to Start</div>');
       this.div.append(this.wrapper);
       this.wrapper.append(this.canvas);
       this.wrapper.append(this.loader);
