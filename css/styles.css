@@ -10039,7 +10039,11 @@ form .row:first-child .floating-label-form-group {
 }
 
 .pre-wrap {
-    white-space: pre-wrap
+    white-space: pre-line
+}
+
+tab {
+    padding-left: 4em;
 }
 
 .icon-contact {
