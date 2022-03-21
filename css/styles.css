@@ -10071,8 +10071,12 @@ tab {
     height: 400px;
 }
 
-.dosbox-container>.dosbox-overlay {
+#dosboxDoom>.dosbox-container>.dosbox-overlay {
     background: url("/assets/img/games/Doom_\(1993\).png");
+}
+
+#dosboxDukeNuke>.dosbox-container>.dosbox-overlay {
+    background: url("/assets/img/games/DukeNuke3D.png");
 }
 
 .dosbox-container>.dosbox-overlay>.dosbox-start {

@@ -1,29 +1,62 @@
 <script type="text/javascript" src="/js/DosBox.js"></script>
 
 <div class="container text-center">
-  <h2 class="page-section-heading d-inline-block text-white" title="Doom em js incoporado a pagina para descontrair" >GAMES </h2>
-  <div class="divider-custom">
-    <div class="divider-custom-line"></div>
-    <div class="divider-custom-icon"><i class="fas fa-gamepad"></i></div>
-    <div class="divider-custom-line"></div>
+  <h2 class="page-section-heading d-inline-block text-white">
+    GAMES </h2>
+  <p>Doom e Duke Nuke 3d em js incorporados a pagina para descontrair.</p>
+  <a class="text-white" href="https://js-dos.com/">Creditos ao js-dos.com</a>
+  <div>
+    <div class="divider-custom">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><i class="fas fa-gamepad"></i></div>
+      <div class="divider-custom-line"></div>
+    </div>
+    <div class="row justify-content-center">
+      <div id="dosboxDoom"></div>
+      <br />
+    </div>
+    <div class="divider-custom">
+    </div>
+    <button class="btn btn-secondary" title="Espere o jogo Iniciar"
+      onclick="dosboxDoom.requestFullScreen();">Fullscreen</button>
+    <div class="divider-custom">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><i class="fas fa-gamepad"></i></div>
+      <div class="divider-custom-line"></div>
+    </div>
   </div>
-  <div class="row justify-content-center">
-    <div id="dosbox"></div>
-    <br />
+  <div>
+    <div class="row justify-content-center">
+      <div id="dosboxDukeNuke"></div>
+      <br />
+    </div>
+    <div class="divider-custom">
+    </div>
+    <button class="btn btn-secondary" title="Espere o jogo Iniciar"
+      onclick="dosboxDukeNuke.requestFullScreen();">Fullscreen</button>
+    <div class="divider-custom">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><i class="fas fa-gamepad"></i></div>
+      <div class="divider-custom-line"></div>
+    </div>
   </div>
-  <div class="divider-custom">
-    <div class="divider-custom-line"></div>
-    <div class="divider-custom-icon"><i class="fas fa-gamepad"></i></div>
-    <div class="divider-custom-line"></div>
-  </div>
-  <button class="btn btn-secondary" title="Espere o jogo Iniciar" onclick="dosbox.requestFullScreen();">Fullscreen</button>
 </div>
 
 <script type="text/javascript">
-  var dosbox = new Dosbox({
-    id: "dosbox",
+  var dosboxDoom = new Dosbox({
+    id: "dosboxDoom",
     onload: function (dosbox) {
       dosbox.run('/assets/doom-box.zip', './DOOM.BAT');
+    },
+    onrun: function (dosbox, app) {
+      $('a#dosbox_fullscreen').show();
+    }
+  });
+  var dosboxDukeNuke = new Dosbox({
+    id: "dosboxDukeNuke",
+    onload: function (dosbox) {
+
+      dosbox.run('/assets/dukeNuke3d-box.zip', 'DUKE3D/DUKE3D.EXE');
     },
     onrun: function (dosbox, app) {
       $('a#dosbox_fullscreen').show();
