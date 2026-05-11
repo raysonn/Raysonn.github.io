@@ -1,0 +1,15 @@
+# robots.txt - Raysonn Suczeck Taborda Portfolio
+User-agent: *
+Allow: /
+Disallow: /assets/mail/
+Disallow: /*.pdf$
+Disallow: /admin/
+Allow: /css/
+Allow: /js/
+Allow: /assets/img/
+
+# Sitemaps
+Sitemap: https://raysonn.github.io/sitemap.xml
+
+# Crawl delay (opcional - em segundos)
+Crawl-delay: 1
