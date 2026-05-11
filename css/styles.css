@@ -7,6 +7,22 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
+    /* === COLORS - PRIMARY PALETTE === */
+    --color-primary: #FFA500;
+    --color-secondary: #2c3e50;
+    --color-dark: #343a40;
+    --color-light: #f8f9fa;
+    --color-white: #fff;
+    --color-gray: #6c757d;
+    --color-gray-dark: #495057;
+    
+    /* === COLORS - STATUS === */
+    --color-success: #28a745;
+    --color-danger: #dc3545;
+    --color-warning: #ffc107;
+    --color-info: #17a2b8;
+    
+    /* === COLORS - LEGACY (Bootstrap Compatibility) === */
     --blue: #007bff;
     --indigo: #6610f2;
     --purple: #6f42c1;
@@ -28,13 +44,67 @@
     --danger: #dc3545;
     --light: #f8f9fa;
     --dark: #343a40;
+    
+    /* === TYPOGRAPHY === */
+    --font-family-heading: "SB Heading", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --font-family-body: "SB Body", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-family-sans-serif: var(--font-family-body);
+    
+    --font-size-base: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-sm: 0.875rem;
+    --font-size-xs: 0.75rem;
+    
+    --font-size-h1: 2.5rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.75rem;
+    --font-size-h4: 1.5rem;
+    --font-size-h5: 1.25rem;
+    --font-size-h6: 1rem;
+    
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    
+    --line-height-base: 1.5;
+    --line-height-heading: 1.2;
+    
+    /* === SPACING === */
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 1.5rem;   /* 24px */
+    --spacing-lg: 2rem;     /* 32px */
+    --spacing-xl: 3rem;     /* 48px */
+    --spacing-xxl: 4.5rem;  /* 72px */
+    --spacing-section: 6rem; /* 96px */
+    
+    /* === BORDERS & RADIUS === */
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 1rem;
+    --border-radius-full: 100%;
+    --border-radius-default: var(--border-radius-md);
+    
+    --border-color: #dee2e6;
+    --border-color-light: #e9ecef;
+    
+    /* === SHADOWS === */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    
+    /* === TRANSITIONS === */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --transition-color: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+    
+    /* === BREAKPOINTS === */
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
-    --font-family-sans-serif: "SB Body", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
 }
 
 *,
@@ -65,17 +135,30 @@ section {
 
 body {
     margin: 0;
-    font-family: SB Body, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-base);
     color: #212529;
     text-align: left;
-    background-color: #fff
+    background-color: var(--color-white);
 }
 
-[tabindex="-1"]:focus:not(:focus-visible) {
-    outline: 0 !important
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+    outline: none;
 }
 
 hr {
@@ -174,14 +257,15 @@ sup {
 }
 
 a {
-    color: #FFA500;
+    color: var(--color-primary);
     text-decoration: none;
-    background-color: transparent
+    background-color: transparent;
+    transition: var(--transition-color);
 }
 
 a:hover {
-    color: #117964;
-    text-decoration: underline
+    color: var(--color-secondary);
+    text-decoration: underline;
 }
 
 a:not([href]),
@@ -387,40 +471,40 @@ h3,
 h4,
 h5,
 h6 {
-    margin-bottom: .5rem;
-    font-family: SB Heading, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    font-weight: 700;
-    line-height: 1.2
+    margin-bottom: var(--spacing-md);
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-heading);
 }
 
 .h1,
 h1 {
-    font-size: 2.5rem
+    font-size: var(--font-size-h1);
 }
 
 .h2,
 h2 {
-    font-size: 2rem
+    font-size: var(--font-size-h2);
 }
 
 .h3,
 h3 {
-    font-size: 1.75rem
+    font-size: var(--font-size-h3);
 }
 
 .h4,
 h4 {
-    font-size: 1.5rem
+    font-size: var(--font-size-h4);
 }
 
 .h5,
 h5 {
-    font-size: 1.25rem
+    font-size: var(--font-size-h5);
 }
 
 .h6,
 h6 {
-    font-size: 1rem
+    font-size: var(--font-size-h6);
 }
 
 .lead {
@@ -579,10 +663,10 @@ pre code {
 
 .container {
     width: 100%;
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
+    padding-right: var(--spacing-lg);
+    padding-left: var(--spacing-lg);
     margin-right: auto;
-    margin-left: auto
+    margin-left: auto;
 }
 
 @media (min-width:576px) {
@@ -615,10 +699,10 @@ pre code {
 .container-sm,
 .container-xl {
     width: 100%;
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
+    padding-right: var(--spacing-lg);
+    padding-left: var(--spacing-lg);
     margin-right: auto;
-    margin-left: auto
+    margin-left: auto;
 }
 
 @media (min-width:576px) {
@@ -662,8 +746,8 @@ pre code {
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-right: -1.5rem;
-    margin-left: -1.5rem
+    margin-right: calc(var(--spacing-lg) * -1);
+    margin-left: calc(var(--spacing-lg) * -1);
 }
 
 .no-gutters {
@@ -749,8 +833,8 @@ pre code {
 .col-xl-auto {
     position: relative;
     width: 100%;
-    padding-right: 1.5rem;
-    padding-left: 1.5rem
+    padding-right: var(--spacing-lg);
+    padding-left: var(--spacing-lg);
 }
 
 .col {
@@ -10819,171 +10903,190 @@ a.text-dark:hover {
 }
 
 .page-section {
-    padding: 6rem 0
+    padding: var(--spacing-section) 0;
 }
 
 .page-section .page-section-heading {
-    font-size: 2.25rem;
-    line-height: 2rem
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-heading);
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
 }
 
 @media (min-width:992px) {
     .page-section .page-section-heading {
         font-size: 3rem;
-        line-height: 2.5rem
+        line-height: 2.5rem;
     }
 }
 
 .divider-custom {
-    margin: 1.25rem 0 1.5rem;
+    margin: var(--spacing-md) 0 var(--spacing-lg);
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
 }
 
 .divider-custom .divider-custom-line {
     width: 100%;
     max-width: 7rem;
-    height: .25rem;
-    background-color: #2c3e50;
-    border-radius: 1rem;
-    border-color: #2c3e50 !important
+    height: 0.25rem;
+    background-color: var(--color-secondary);
+    border-radius: var(--border-radius-lg);
+    border-color: var(--color-secondary) !important;
 }
 
 .divider-custom .divider-custom-line:first-child {
-    margin-right: 1rem
+    margin-right: var(--spacing-md);
 }
 
 .divider-custom .divider-custom-line:last-child {
-    margin-left: 1rem
+    margin-left: var(--spacing-md);
 }
 
 .divider-custom .divider-custom-icon {
-    color: #2c3e50 !important;
-    font-size: 2rem
+    color: var(--color-secondary) !important;
+    font-size: 2rem;
 }
 
 .divider-custom.divider-light .divider-custom-line {
-    background-color: #fff
+    background-color: var(--color-white);
 }
 
 .divider-custom.divider-light .divider-custom-icon {
-    color: #fff !important
+    color: var(--color-white) !important;
 }
 
 .btn-xl {
-    padding: 1rem 1.75rem;
-    font-size: 1.25rem
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    transition: var(--transition-color);
 }
 
 .btn-social {
-    border-radius: 100%;
+    border-radius: var(--border-radius-full);
     display: inline-flex;
     width: 3.25rem;
     height: 3.25rem;
-    font-size: 1.25rem;
+    font-size: var(--font-size-lg);
     justify-content: center;
-    align-items: center
+    align-items: center;
+    transition: var(--transition-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.btn-social:hover,
+.btn-social:focus {
+    transform: translateY(-2px);
 }
 
 .scroll-to-top {
     z-index: 1042;
-    right: 1rem;
-    bottom: 1rem;
-    display: none
+    right: var(--spacing-md);
+    bottom: var(--spacing-md);
+    display: none;
 }
 
 .scroll-to-top a {
     width: 3.5rem;
     height: 3.5rem;
-    background-color: rgba(33, 37, 41, .5);
-    line-height: 3.1rem
+    background-color: rgba(33, 37, 41, 0.5);
+    line-height: 3.1rem;
+    transition: var(--transition-color);
+}
+
+.scroll-to-top a:hover {
+    background-color: rgba(33, 37, 41, 0.75);
 }
 
 #mainNav {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    font-family: SB Heading, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    font-weight: 700
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
 }
 
 #mainNav .navbar-brand {
-    color: #fff
+    color: var(--color-white);
 }
 
 #mainNav .navbar-nav {
-    margin-top: 1rem
+    margin-top: var(--spacing-md);
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link {
-    color: #fff
+    color: var(--color-white);
+    transition: var(--transition-color);
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
-    color: #FFA500
+    color: var(--color-primary);
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link:active,
 #mainNav .navbar-nav li.nav-item a.nav-link:focus {
-    color: #fff
+    color: var(--color-white);
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link.active {
-    color: #FFA500
+    color: var(--color-primary);
 }
 
 #mainNav .navbar-toggler {
     font-size: 80%;
-    padding: .8rem
+    padding: .8rem;
 }
 
 @media (min-width:992px) {
     #mainNav {
-        padding-top: 1.5rem;
-        padding-bottom: 1.5rem;
-        transition: padding-top .3s, padding-bottom .3s
+        padding-top: var(--spacing-lg);
+        padding-bottom: var(--spacing-lg);
+        transition: padding-top var(--transition-base), padding-bottom var(--transition-base);
     }
 
     #mainNav .navbar-brand {
         font-size: 1.75em;
-        transition: font-size .3s
+        transition: font-size var(--transition-base);
     }
 
     #mainNav .navbar-nav {
-        margin-top: 0
+        margin-top: 0;
     }
 
     #mainNav .navbar-nav>li.nav-item>a.nav-link.active,
     #mainNav .navbar-nav>li.nav-item>a.nav-link.active:active,
     #mainNav .navbar-nav>li.nav-item>a.nav-link.active:focus,
     #mainNav .navbar-nav>li.nav-item>a.nav-link.active:hover {
-        color: #fff;
-        background: #FFA500
+        color: var(--color-white);
+        background: var(--color-primary);
     }
 
     #mainNav.navbar-shrink {
-        padding-top: .5rem;
-        padding-bottom: .5rem
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
     }
 
     #mainNav.navbar-shrink .navbar-brand {
-        font-size: 1.5em
+        font-size: 1.5em;
     }
 }
 
 .masthead {
-    padding-top: calc(6rem + 74px);
-    padding-bottom: 6rem
+    padding-top: calc(var(--spacing-section) + 74px);
+    padding-bottom: var(--spacing-section);
 }
 
 .masthead .masthead-heading {
     font-size: 2.75rem;
-    line-height: 2.75rem
+    line-height: 2.75rem;
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
 }
 
 .masthead .masthead-subheading {
-    font-size: 1.25rem
+    font-size: var(--font-size-lg);
 }
 
 .masthead .masthead-avatar {
@@ -10992,8 +11095,8 @@ a.text-dark:hover {
 
 @media (min-width:992px) {
     .masthead {
-        padding-top: calc(6rem + 104px);
-        padding-bottom: 6rem
+        padding-top: calc(var(--spacing-section) + 104px);
+        padding-bottom: var(--spacing-section);
     }
 
     .masthead .masthead-heading {
@@ -11011,21 +11114,21 @@ a.text-dark:hover {
     position: relative;
     display: block;
     max-width: 25rem;
-    border-radius: .5rem;
-    overflow: hidden
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
 }
 
 .portfolio .portfolio-item .portfolio-item-caption {
     position: absolute;
     top: 0;
     left: 0;
-    transition: all .2s ease-in-out;
+    transition: all var(--transition-base);
     opacity: 0;
-    background-color: rgba(255, 165, 0, .75)
+    background-color: rgba(255, 165, 0, 0.75);
 }
 
 .portfolio .portfolio-item .portfolio-item-caption:hover {
-    opacity: 1
+    opacity: 1;
 }
 
 .portfolio .portfolio-item .portfolio-item-caption .portfolio-item-caption-content {
@@ -11047,17 +11150,23 @@ a.text-dark:hover {
 .portfolio-modal .close {
     position: absolute;
     z-index: 1;
-    right: 1.5rem;
-    top: 1rem;
+    right: var(--spacing-lg);
+    top: var(--spacing-md);
     font-size: 3rem;
     line-height: 3rem;
-    color: #FFA500;
-    opacity: 1
+    color: var(--color-primary);
+    opacity: 1;
+    transition: var(--transition-color);
+}
+
+.portfolio-modal .close:hover,
+.portfolio-modal .close:focus {
+    color: var(--color-secondary);
 }
 
 .floating-label-form-group {
     position: relative;
-    border-bottom: 1px solid #e9ecef
+    border-bottom: 1px solid var(--border-color-light);
 }
 
 .floating-label-form-group input,
@@ -11071,48 +11180,49 @@ a.text-dark:hover {
     border: none;
     border-radius: 0;
     background: none;
-    box-shadow: none !important
+    box-shadow: none !important;
 }
 
 .floating-label-form-group label {
-    font-size: .85em;
+    font-size: 0.85em;
     line-height: 1.764705882em;
     position: relative;
     z-index: 0;
     top: 2em;
     display: block;
     margin: 0;
-    transition: top .3s ease, opacity .3s ease;
-    opacity: 0
+    transition: top var(--transition-base), opacity var(--transition-base);
+    opacity: 0;
 }
 
 .floating-label-form-group:not(:first-child) {
     padding-left: 14px;
-    border-left: 1px solid #e9ecef
+    border-left: 1px solid var(--border-color-light);
 }
 
 .floating-label-form-group-with-value label {
     top: 0;
-    opacity: 1
+    opacity: 1;
 }
 
 .floating-label-form-group-with-focus label {
-    color: #FFA500
+    color: var(--color-primary);
 }
 
 form .row:first-child .floating-label-form-group {
-    border-top: 1px solid #e9ecef
+    border-top: 1px solid var(--border-color-light);
 }
 
 .footer {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    background-color: #2c3e50;
-    color: #fff
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    background-color: var(--color-secondary);
+    color: var(--color-white);
 }
 
 .copyright {
-    background-color: #1a252f
+    background-color: #1a252f;
+    padding: var(--spacing-md) 0;
 }
 
 #brandImage {
@@ -11120,8 +11230,8 @@ form .row:first-child .floating-label-form-group {
 }
 
 .portfolio {
-    padding-top: 6rem;
-    padding-bottom: 4.5rem
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-xxl);
 }
 
 .page-section-heading {
@@ -11147,9 +11257,14 @@ tab {
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    background-color: #FFA500;
-    color: #fff;
-    border-radius: 100%
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--border-radius-full);
+    transition: var(--transition-color);
+}
+
+.icon-contact:hover {
+    background-color: var(--color-secondary);
 }
 
 .navbar-brand img {
