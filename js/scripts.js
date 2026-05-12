@@ -6,6 +6,66 @@
 (function ($) {
   "use strict"; // Start of use strict
 
+  // === INTERSECTION OBSERVER - Lazy Loading & Animations ===
+  // Observa elementos para carregar imagens e animar ao aparecer na viewport
+  if ('IntersectionObserver' in window) {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '50px 0px'
+    };
+
+    const imageObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          
+          // Carrega imagem
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
+          
+          // Adiciona classe para animação
+          img.classList.add('fade-in-visible');
+          imageObserver.unobserve(img);
+        }
+      });
+    }, observerOptions);
+
+    // Observa todas as imagens com data-src (lazy load)
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
+
+  // === SCROLL ANIMATIONS - Fade-in elementos ao aparecer na viewport ===
+  if ('IntersectionObserver' in window) {
+    const animationObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          
+          // Obtém a classe de animação (padrão: fade-in)
+          const animationClass = element.dataset.animation || 'fade-in-visible';
+          element.classList.add(animationClass);
+          
+          // Remove do observer se indicado
+          if (!element.dataset.repeat) {
+            animationObserver.unobserve(element);
+          }
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '50px 0px'
+    });
+
+    // Observa elementos com classe 'animate-on-scroll'
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      animationObserver.observe(el);
+    });
+  }
+
   // Smooth scrolling using jQuery easing
   $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
