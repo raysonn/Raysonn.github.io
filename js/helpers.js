@@ -16,6 +16,17 @@ function loadGames() {
     });
 }
 
+function loadInteractions() {
+    $(window).on('load', function () {
+        $("#interactions").load("html/sections/sinteractions.html", function() {
+            // Callback após o HTML ser carregado - inicializa o quiz
+            if (typeof initializeInteractions === 'function') {
+                initializeInteractions();
+            }
+        });
+    });
+}
+
 function printPdf(data, title) {
     const byteCharacters = atob(data);
     const byteNumbers = new Array(byteCharacters.length);
