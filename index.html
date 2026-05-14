@@ -169,7 +169,7 @@
     </footer>
     <!-- Copyright Section-->
     <section class="copyright py-4 text-center text-white">
-        <div class="container"><small class="pre-wrap">Copyright © Raysonn Suczeck Taborda Website 2022</small></div>
+        <div class="container"><small class="pre-wrap">Copyright © Raysonn Suczeck Taborda Website <span id="current-date"></span></small></div>
     </section>
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
     <div class="scroll-to-top d-lg-none position-fixed"><a
@@ -208,7 +208,21 @@
             loadGames();
             loadInteractions();
             konamiCode();
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
         });
+
+        function updateDateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            document.getElementById('current-date').textContent = formattedDate;
+        }
     </script>
 </body>
 <!-- https://startbootstrap.com/previews/freelancer/ Exemplo da onde ter pegado -->
