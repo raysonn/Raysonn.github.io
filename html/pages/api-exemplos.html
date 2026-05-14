@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Pública - Exemplos Interativos | Raysonn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2d3748;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-size: 16px;
+            color: #718096;
+            margin-bottom: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card h3 {
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .feature-card p {
+            color: #718096;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .components-grid {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .component-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .component-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-bottom: 4px solid #667eea;
+        }
+
+        .component-header h2 {
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .component-body {
+            padding: 30px 20px;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 24px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .component-header {
+                padding: 16px;
+            }
+
+            .component-body {
+                padding: 20px;
+            }
+        }
+
+        /* Loading state */
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #718096;
+        }
+
+        .spinner {
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../../index.html" class="back-link">← Voltar ao portfólio</a>
+
+        <div class="page-header">
+            <h1>🌐 APIs Públicas - Exemplos Interativos</h1>
+            <p>Demonstração de integração com múltiplas APIs em tempo real</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🔄 Retry com Exponential Backoff</h3>
+                <p>Sistema automático de re-tentativas com atraso exponencial para garantir confiabilidade.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💾 Cache Inteligente</h3>
+                <p>Cache local com expiração automática para reduzir requisições desnecessárias.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⏱️ Timeout & Tratamento de Erros</h3>
+                <p>Gestão robusta de erros com timeouts configuráveis e fallbacks.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📱 Responsivo</h3>
+                <p>Interface totalmente responsiva que funciona em todos os dispositivos.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔐 Sem Credenciais</h3>
+                <p>Todas as APIs utilizadas não requerem chaves no frontend.</p>
+            </div>
+            <div class="feature-card">
+                <h3>♿ Acessível</h3>
+                <p>Suporte WCAG AA com navegação por teclado e screen readers.</p>
+            </div>
+        </div>
+
+        <div class="components-grid">
+            <!-- GitHub Component -->
+            <div class="component-section">
+                <div class="component-header">
+                    <h2>📊 GitHub Repositories</h2>
+                </div>
+                <div class="component-body">
+                    <div id="github-component"></div>
+                </div>
+            </div>
+
+            <!-- Countries Component -->
+            <div class="component-section">
+                <div class="component-header">
+                    <h2>🌍 REST Countries API</h2>
+                </div>
+                <div class="component-body">
+                    <div id="countries-component"></div>
+                </div>
+            </div>
+
+            <!-- Crypto Component -->
+            <div class="component-section">
+                <div class="component-header">
+                    <h2>₿ CoinGecko API - Criptomoedasas</h2>
+                </div>
+                <div class="component-body">
+                    <div id="crypto-component"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Importar componentes
+        import GitHubStatsComponent from '../../js/interacoes-module/src/components/GitHubStatsComponent.js';
+        import CountriesComponent from '../../js/interacoes-module/src/components/CountriesComponent.js';
+        import CryptoComponent from '../../js/interacoes-module/src/components/CryptoComponent.js';
+        import EventBus from '../../js/interacoes-module/src/infrastructure/EventBus.js';
+
+        // Criar EventBus compartilhado
+        const eventBus = new EventBus();
+
+        // Inicializar GitHub Component
+        const githubComponent = new GitHubStatsComponent(
+            document.getElementById('github-component'),
+            { username: 'raysonn' }
+        );
+        githubComponent.eventBus = eventBus;
+        githubComponent.init();
+
+        // Inicializar Countries Component
+        const countriesComponent = new CountriesComponent(
+            document.getElementById('countries-component'),
+            { displayCount: 8 }
+        );
+        countriesComponent.eventBus = eventBus;
+        countriesComponent.init();
+
+        // Inicializar Crypto Component
+        const cryptoComponent = new CryptoComponent(
+            document.getElementById('crypto-component'),
+            { currency: 'usd', displayCount: 5 }
+        );
+        cryptoComponent.eventBus = eventBus;
+        cryptoComponent.init();
+
+        // Event listeners para logging
+        eventBus.subscribe('github:loaded', (data) => {
+            console.log('✅ GitHub loaded:', data);
+        });
+
+        eventBus.subscribe('countries:loaded', (data) => {
+            console.log('✅ Countries loaded:', data);
+        });
+
+        eventBus.subscribe('crypto:loaded', (data) => {
+            console.log('✅ Crypto loaded:', data);
+        });
+
+        eventBus.subscribe('github:error', (data) => {
+            console.error('❌ GitHub error:', data);
+        });
+
+        eventBus.subscribe('countries:error', (data) => {
+            console.error('❌ Countries error:', data);
+        });
+
+        eventBus.subscribe('crypto:error', (data) => {
+            console.error('❌ Crypto error:', data);
+        });
+
+        // Cleanup ao sair
+        window.addEventListener('beforeunload', () => {
+            githubComponent.destroy();
+            countriesComponent.destroy();
+            cryptoComponent.destroy();
+        });
+    </script>
+</body>
+</html>
