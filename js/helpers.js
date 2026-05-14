@@ -1,3 +1,7 @@
+var apiConstructors = {};
+var apiInstances = {};
+var apiEventBus = null;
+
 function getLanguage() {
     var language = navigator.language;
     return language;
@@ -8,6 +12,9 @@ function loadSections() {
     $("#about").load("html/sections/sabout.html");
     $("#contact").load("html/sections/scontacts.html");
     $("#resume").load("html/sections/sresume.html");
+    $("#api-exemplos").load("html/sections/sapi-exemplos.html", function () {
+        loadApiExemplos();
+    });
 }
 
 function loadGames() {
@@ -25,6 +32,79 @@ function loadInteractions() {
             }
         });
     });
+}
+
+async function loadApiExemplos() {
+    try {
+        const [GitHubModule, CountriesModule, CryptoModule, EventBusModule] = await Promise.all([
+            import('./interacoes-module/src/components/GitHubStatsComponent.js'),
+            import('./interacoes-module/src/components/CountriesComponent.js'),
+            import('./interacoes-module/src/components/CryptoComponent.js'),
+            import('./interacoes-module/src/infrastructure/EventBus.js')
+        ]);
+
+        apiConstructors = {
+            github: GitHubModule.default,
+            countries: CountriesModule.default,
+            crypto: CryptoModule.default
+        };
+
+        apiEventBus = new EventBusModule.default();
+
+        $('#api-exemplos .api-card').on('mouseenter', function () {
+            const apiKey = $(this).data('api');
+            if (apiKey) {
+                openApiModal(apiKey);
+            }
+        });
+    } catch (error) {
+        console.error('Erro ao inicializar seção API Exemplos:', error);
+    }
+}
+
+async function openApiModal(apiKey) {
+    const titles = {
+        github: 'GitHub Repositories',
+        countries: 'REST Countries',
+        crypto: 'CoinGecko'
+    };
+
+    const title = titles[apiKey] || 'API Demo';
+    $('#apiModalLabel').text(title);
+
+    const container = document.querySelector('#api-component-container');
+    if (!container) {
+        return;
+    }
+
+    if ($('#apiModal').hasClass('show')) {
+        return;
+    }
+
+    container.innerHTML = '';
+    if (apiInstances[apiKey] && typeof apiInstances[apiKey].destroy === 'function') {
+        apiInstances[apiKey].destroy();
+    }
+
+    const Constructor = apiConstructors[apiKey];
+    if (!Constructor) {
+        return;
+    }
+
+    const displayCount = apiKey === 'countries' ? 4 : 3;
+    const instance = new Constructor(container, {
+        displayCount,
+        eventBus: apiEventBus
+    });
+
+    apiInstances[apiKey] = instance;
+
+    try {
+        await instance.init();
+        $('#apiModal').modal('show');
+    } catch (error) {
+        console.error('Erro ao abrir modal API:', error);
+    }
 }
 
 function printPdf(data, title) {
