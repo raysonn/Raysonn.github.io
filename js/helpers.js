@@ -8,7 +8,7 @@ function getLanguage() {
 }
 
 function loadSections() {
-    $("#portfolio").load("html/sections/sportifolio.html");
+    $("#portfolio").load("html/sections/portfolio.html");
     $("#about").load("html/sections/sabout.html");
     $("#contact").load("html/sections/scontacts.html");
     $("#resume").load("html/sections/sresume.html");
@@ -51,7 +51,7 @@ async function loadApiExemplos() {
 
         apiEventBus = new EventBusModule.default();
 
-        $('#api-exemplos .api-card').on('mouseenter', function () {
+        $('#api-exemplos .api-card').on('click', function () {
             const apiKey = $(this).data('api');
             if (apiKey) {
                 openApiModal(apiKey);
