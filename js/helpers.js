@@ -36,17 +36,19 @@ function loadInteractions() {
 
 async function loadApiExemplos() {
     try {
-        const [GitHubModule, CountriesModule, CryptoModule, EventBusModule] = await Promise.all([
+        const [GitHubModule, CountriesModule, CryptoModule, ImageGalleryModule, EventBusModule] = await Promise.all([
             import('./interacoes-module/src/components/GitHubStatsComponent.js'),
             import('./interacoes-module/src/components/CountriesComponent.js'),
             import('./interacoes-module/src/components/CryptoComponent.js'),
+            import('./interacoes-module/src/components/ImageGalleryComponent.js'),
             import('./interacoes-module/src/infrastructure/EventBus.js')
         ]);
 
         apiConstructors = {
             github: GitHubModule.default,
             countries: CountriesModule.default,
-            crypto: CryptoModule.default
+            crypto: CryptoModule.default,
+            multimidia: ImageGalleryModule.default
         };
 
         apiEventBus = new EventBusModule.default();
@@ -66,7 +68,8 @@ async function openApiModal(apiKey) {
     const titles = {
         github: 'GitHub Repositories',
         countries: 'REST Countries',
-        crypto: 'CoinGecko'
+        crypto: 'CoinGecko',
+        multimidia: 'Galeria Multimídia'
     };
 
     const title = titles[apiKey] || 'API Demo';
@@ -91,7 +94,11 @@ async function openApiModal(apiKey) {
         return;
     }
 
-    const displayCount = apiKey === 'countries' ? 4 : 3;
+    const displayCount = apiKey === 'countries'
+        ? 4
+        : apiKey === 'multimidia'
+            ? 8
+            : 6;
     const instance = new Constructor(container, {
         displayCount,
         eventBus: apiEventBus

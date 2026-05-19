@@ -31,9 +31,10 @@ class APIClient {
     async request(endpoint, options = {}) {
         const method = options.method || 'GET';
         const cacheKey = `${method}:${endpoint}`;
+        const skipCache = options.noCache === true;
         
         // Verificar cache
-        if (method === 'GET' && this.isCacheValid(cacheKey)) {
+        if (method === 'GET' && !skipCache && this.isCacheValid(cacheKey)) {
             return this.cache.get(cacheKey);
         }
 
@@ -45,7 +46,7 @@ class APIClient {
                 const data = await this.executeRequest(endpoint, options);
                 
                 // Cachear sucesso
-                if (method === 'GET') {
+                if (method === 'GET' && !skipCache) {
                     this.setCache(cacheKey, data);
                 }
                 
